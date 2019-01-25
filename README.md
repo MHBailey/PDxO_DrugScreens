@@ -11,11 +11,14 @@ First, you have to install the Miniconda Python3 distribution. See here for inst
 
 
 Now I would recommend setting up a new envirnoment 
+
 `conda create -n "sm"`
+
 `source activate sm`
 
 
 Then, you can install Snakemake with 
+
 `conda install -c bioconda -c conda-forge snakemake`
 
 
