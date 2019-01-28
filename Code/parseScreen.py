@@ -1,4 +1,12 @@
-
+def getLineCNV(fname):
+    out = 0
+    with open(fname, "r") as f:
+        for line in f:
+            variable,value = line[:-1].split(",")
+            if variable == "MOD":
+                out = int(value)
+    f.close()
+    return out  
 
 def dictPrint(d):
     for k in d:
@@ -232,6 +240,6 @@ if __name__ == "__main__":
     import sys 
     f1 = sys.argv[1] #This is the BLANK
     f2 = sys.argv[2] #This is the Retro 
-    blankMOD = int(sys.argv[3]) # Neets to be automated 
+    blankMOD = getLineCNV(sys.argv[3]) # Neets to be automated 
     out = sys.argv[4] # This is the output #Something to take to ggplot
     parseScreen(f1,f2,out, blankMOD)
