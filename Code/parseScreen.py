@@ -193,7 +193,7 @@ def parseScreen(f1,f2,out,blankMOD):
                 flag = False
                 break
 
-            if flag and line[:-1] != headstr:
+            if flag and headstr not in line[:-1]:
                 count = 0
                 platerow = ""
                 for i in line[:-1].split(","):
@@ -209,7 +209,7 @@ def parseScreen(f1,f2,out,blankMOD):
  
     with open(f2, "r") as f:
         for line in f:
-            if line[:-1] == headstr: 
+            if headstr in line[:-1]: 
                 flag = True
             
             if line[:-1] == empty and flag:
@@ -223,7 +223,7 @@ def parseScreen(f1,f2,out,blankMOD):
                 else:
                     first = True
 
-            if flag and first and line[:-1] != headstr:
+            if flag and first and headstr not in line[:-1]:
                 count = 0 
                 platerow = ""
                 for i in line[:-1].split(","):
