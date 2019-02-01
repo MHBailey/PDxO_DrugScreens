@@ -1,3 +1,3 @@
-MAP: Sandbox/concentrations.csv
-RETRO: Sandbox/retro214postread.csv
-BLANK: Sandbox/blankforretro214.csv
+MAP: Data/10-11-2018-Testing/concentrations.csv
+RETRO: Data/10-11-2018-Testing/assayread.csv
+BLANK: Data/10-11-2018-Testing/4columnblank.csv

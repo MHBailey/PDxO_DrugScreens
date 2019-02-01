@@ -50,7 +50,7 @@ p <- p + theme_classic()
 p <- p + theme(axis.text.x = element_text(angle = 90, hjust=1,vjust=.5))
 #p <- p + scale_fill_viridis(limits = c(0,4))
 #p <- p + scale_fill_gradient2(high="red", mid="white", low="green", midpoint = 1, limits = c(0,4))
-p <- p + scale_fill_gradientn(colours = colfunc(3), limits=c(0,4), values=rescale(c(0,1,4)))
+p <- p + scale_fill_gradientn(colours = colfunc(3), limits=c(-0.1,4), values=rescale(c(-0.1,1,4)))
 #p
 
 pdf(args[3],height=6,width=8)
