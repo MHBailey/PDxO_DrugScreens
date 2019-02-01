@@ -7,7 +7,7 @@ rule parse:
     input:
         blank=config['BLANK'],
         retro=config['RETRO'],
-        blankmod=config['MOD'],
+        mymap=config['MAP'],
         parse='Code/parseScreen.py'
     output: 
         toPlot='Processed_data/tester2plot.txt'
@@ -16,7 +16,7 @@ rule parse:
         touch {output.toPlot}
         rm {output.toPlot}
         touch {output.toPlot}
-        python {input.parse} {input.blank} {input.retro} "{input.blankmod}" {output.toPlot}
+        python {input.parse} {input.blank} {input.retro} {input.mymap} {output.toPlot}
         '''
 
 
