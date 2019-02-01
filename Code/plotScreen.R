@@ -41,7 +41,7 @@ wConc$Drug = factor(wConc$Drug, levels=drugs$Drug)
 
 #Now if I can take this and make a tile plot I should be good 
 solv <- wConc[which(wConc$Normalized == "Solvent"),]
-colfunc <- colorRampPalette(c("green","white","red"))
+colfunc <- colorRampPalette(c("red","white","green"))
 
 p <- ggplot(solv,aes(x=Drug,y=Concentrations))
 p <- p + geom_tile(aes(fill = AVG))
