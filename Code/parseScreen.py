@@ -111,8 +111,15 @@ def processPlate(BLANK, RETRO, group, out, blankMOD):
     #I'm at the point where I need to calculate averages from BLANKS and SOLVENT
     D0MOD = blankMOD 
     D0avgs = processBlank(BLANK)
-    d0platepos = int(group/D0MOD)
-    print(group)
+    d0platepos = int(group/D0MOD) #This catptures which blank to pull
+    print("Processing plate #: "+str(group))
+
+    try:
+        d0avg = D0avgs[d0platepos]
+    except IndexError:
+        print('\n\nWARNING:::Emilio is VERY ANGRY WITH YOU!!!!!\nYou DO NOT have enough blanks to cover the rest of the plates.\nPlease check the PlatesPerBlank (MOD) command in concentrations.csv.\n\nThe program with continue with the blanks you specified.\nNow go apologize to Emilio and fix the concentration.csv file\n\n\n')
+        sys.exit(0)
+
     d0avg = D0avgs[d0platepos] #Array position of the 
 
     #Get the plate information
@@ -138,7 +145,7 @@ def processPlate(BLANK, RETRO, group, out, blankMOD):
 
     #Now I write out a file that can be dealt with in R 
     ofname = out
-    with open(ofname, "a") as o: 
+    with open(ofname, "a+") as o: 
         if len(PLATE["d_1_v_1"]) == 4 and group == 0:
             header = ["Plate","DrugVol","Normalized","V1","V2","V3","V4"] #THIS NEEDS TO BE LESS HARD CODED
             o.write("\t".join(header))
@@ -189,7 +196,7 @@ def parseScreen(f1,f2,out,blankMOD):
             if headstr in line[:-1]: #I could make this more dynamic by make this str.startswith
                 flag = True
 
-            if line[:-1] == empty and flag:
+            if flag and (line[:-1] == empty or line == "\n"):
                 flag = False
                 break
 
@@ -212,7 +219,7 @@ def parseScreen(f1,f2,out,blankMOD):
             if headstr in line[:-1]: 
                 flag = True
             
-            if line[:-1] == empty and flag:
+            if flag and (line[:-1] == empty or line == "\n"):
                 flag = False
                 if first:
                     platenum += 1   
