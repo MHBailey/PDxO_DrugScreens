@@ -167,7 +167,7 @@ def processPlate(BLANK, RETRO, group, out, blankMOD):
 
 def parseScreen(f1,f2,out,blankMOD):
 
-    headstr = ",1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24"
+    headstr = "10,11,12,13,14,15,16,17,18,19,20"
     empty = ",,,,,,,,,,,,,,,,,,,,,,,,"
     flag = False
     first = True 
@@ -178,7 +178,7 @@ def parseScreen(f1,f2,out,blankMOD):
     
     with open(f1,"r") as f:
         for line in f: 
-            if line[:-1] == headstr: #I could make this more dynamic by make this str.startswith
+            if headstr in line[:-1]: #I could make this more dynamic by make this str.startswith
                 flag = True
 
             if line[:-1] == empty and flag:

@@ -1,0 +1,10 @@
+# Ignore data directory
+Data/*
+Processed_data/*
+Sandbox/*
+.snakemake 
+
+#Ignore any results
+*.pdf
+*.txt
+*.csv
