@@ -36,7 +36,6 @@ rule analyze:
         Rscript --quiet --vanilla {input.plot} {input.toPlot} {input.mymap} {output.sPlot}
         '''    
 
-
 rule all: 
     input: 'Processed_data/'+DPN+'_results.pdf'
 
