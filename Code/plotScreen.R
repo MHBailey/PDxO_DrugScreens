@@ -15,6 +15,7 @@ if (length(args) != 3) {
 
 #Testing purposes only 
 #args = c("../Processed_data/tester2plot.txt","../Sandbox/concentrations.csv","test.screen.pdf")
+#args = c("../Processed_data/TOW19/day6i1.csv_transformed.txt","../Data/TOW19/concentrations_1.csv","test.screen.pdf")
 
 
 data <- fread(args[1],header=T,sep="\t")
@@ -29,6 +30,7 @@ colnames(concen) <- c("vID","Concentrations")
 
 
 data = data %>% tidyr::separate(DrugVol, c("dID","vID"), "_v")
+
 data$vID = paste("v",data$vID,sep="")
 
 
