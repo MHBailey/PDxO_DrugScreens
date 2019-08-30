@@ -1,10 +1,10 @@
-def getLineCNV(fname):
+def getLineCNV(fname,var):
     out = 0
     with open(fname, "r") as f:
         for line in f:
             variable,value = line[:-1].split(",")
-            if variable == "MOD":
-                out = int(value)
+            if variable == var:
+                out = value
     f.close()
     return out  
 
@@ -180,7 +180,7 @@ def processPlate(BLANK, RETRO, group, out, blankMOD):
 
            
 
-def parseScreen(f1,f2,out,blankMOD):
+def parseScreen(f1,f2,out,blankMOD,blankADJ):
 
     headstr = "10,11,12,13,14,15,16,17,18,19,20"
     empty = ",,,,,,,,,,,,,,,,,,,,,,,,"
@@ -219,16 +219,25 @@ def parseScreen(f1,f2,out,blankMOD):
             if headstr in line[:-1]: 
                 flag = True
             
-            if flag and (line[:-1] == empty or line == "\n"):
-                flag = False
-                if first:
-                    platenum += 1   
+            if blankADJ.lower() == "yes":
+                if flag and (line[:-1] == empty or line == "\n"):
+                    flag = False
+                    if first:
+                        platenum += 1   
+                        if RETRO["A2"] != "- ":
+                            processPlate(BLANK,RETRO,platenum,out,blankMOD)
+                        RETRO = {} #Empty the old Retro 
+                        first = False
+                    else:
+                        first = True
+
+            else:
+                if flag and (line[:-1] == empty or line == "\n"):
+                    flag = False
+                    platenum += 1
                     if RETRO["A2"] != "- ":
                         processPlate(BLANK,RETRO,platenum,out,blankMOD)
                     RETRO = {} #Empty the old Retro 
-                    first = False
-                else:
-                    first = True
 
             if flag and first and headstr not in line[:-1]:
                 count = 0 
@@ -247,6 +256,8 @@ if __name__ == "__main__":
     import sys 
     f1 = sys.argv[1] #This is the BLANK
     f2 = sys.argv[2] #This is the Retro 
-    blankMOD = getLineCNV(sys.argv[3]) # Neets to be automated 
+    blankMOD = int(getLineCNV(sys.argv[3],"MOD")) # Neets to be automated 
+    blankADJ = getLineCNV(sys.argv[3],"ADJ") # is the file have adj or not
     out = sys.argv[4] # This is the output #Something to take to ggplot
-    parseScreen(f1,f2,out, blankMOD)
+
+    parseScreen(f1,f2,out, blankMOD, blankADJ)

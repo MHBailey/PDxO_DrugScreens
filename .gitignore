@@ -1,4 +1,5 @@
 # Ignore data directory
+Figures/
 Data/*
 Processed_data/*
 Sandbox/*
