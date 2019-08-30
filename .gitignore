@@ -1,9 +1,10 @@
 # Ignore data directory
 Figures/
-Data/*
-Processed_data/*
-Sandbox/*
+Data/
+Processed_data/
+Sandbox/
 .snakemake 
+.DS_Store
 
 #Ignore any results
 *.pdf
