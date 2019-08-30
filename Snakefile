@@ -32,7 +32,6 @@ rule analyze:
         plot='Code/plotScreenPlate.R'
     output:
         sPlot='Processed_data/'+DPN+'_results.pdf'
-        sPlot='Processed_data/'+DPN+'_results.pdf',
         dPlot='Processed_data/'+DPN+'_results_bydrug.pdf',
         longf='Processed_data/'+DPN+'.longformat.txt'
     shell:
@@ -41,22 +40,10 @@ rule analyze:
         '''    
 
 
-rule calc_ecStatic_noAVG:
-    input:
-        katmatt='Processed_data/'+DPN+'.longformat.txt',
-        katECscript='Code/katECstatic_noAVG.R'
-    output:
-        ecstatic='Processed_data/'+DPN+'_ecstats.txt' 
-    shell:
-        '''
-        Rscript --quiet --vanilla {input.katECscript} {input.katmatt} {output.ecstatic}
-        '''
-
 rule all: 
-    input: 'Processed_data/'+DPN+'_results.pdf'
     input: 
         figures='Processed_data/'+DPN+'_results.pdf',
-        #ecstats='Processed_data/'+DPN+'_ecstats.txt'
+
 
 
 
